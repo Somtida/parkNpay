@@ -35,7 +35,7 @@ export default class Reservations extends Component {
   render() {
     return (
       <div className="text-center">
-        <h1>Reserve</h1>
+        {/*<h1 className="alert alert-info">Reserve</h1>*/}
 
         <div className="col-xs-12">
           <AddReserveForm />

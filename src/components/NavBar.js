@@ -26,7 +26,7 @@ export default class NavBar extends Component {
 
             <ul className="nav navbar-nav navbar-right">
               <li><Link to="reserve">Reserve Spot</Link></li>
-              <li><Link to="properties">Check Avaliable Spot</Link></li>
+              <li><Link to="remaining">Time Remaining</Link></li>
             </ul>
           </div>
         </div>

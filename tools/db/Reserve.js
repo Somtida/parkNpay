@@ -1,18 +1,23 @@
 import mongoose, { Schema } from 'mongoose'
 
 let Reserve;
-let customerSchema = Schema({
-  name: String,
-  email: String,
-  phone: String,
-})
+// let customerSchema = Schema({
+//   name: String,
+//   email: String,
+//   phone: String,
+// })
 let reserveSchema = Schema({
   lot: String,
   spot: String,
   duration: String,
   price: String,
+  name: String,
+  email: String,
+  phone: String,
   transaction: String,
-  customers: [customerSchema],
+  time: {type: Date},
+  expirationTime: {type: Date},
+  // customers: customerSchema,
   // time: {type: Date, default: Date.now},
   // expirationTime: {type: Date, default: expire},
 });

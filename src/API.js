@@ -4,6 +4,13 @@ import ServerActions from './actions/ServerActions'
 
 const API = {
   addNewReserve(reservation) {
+    if(reservation.duration == 'allDay'){
+      reservation.time = Date.now();
+      reservation.expirationTime = new Date().setHours(0,0,0,0)
+    }else{
+      reservation.time = Date.now();
+      reservation.expirationTime = Date.now()+(reservation.duration*3600000);
+    }
     console.log('3. posting to server: ', reservation);
     post('/api/reserve', reservation)
     .done(response => {
