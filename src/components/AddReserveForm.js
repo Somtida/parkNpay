@@ -39,8 +39,8 @@ export default class AddReserveForm extends Component {
     // if(this.state.spot)
     if (this.checkAvaliable(this.state.spot)){
       console.log('1. send to actions.addNewReserve in ReserveActions: ', this.state);
-      // ReserveActions.addNewReserve(this.state);
-      // this.setState({name: '', email: '', phone: '', lot: 'A', spot: '', duration: 'allDay'})
+      ReserveActions.addNewReserve(this.state);
+      this.setState({name: '', email: '', phone: '', lot: 'A', spot: '', duration: 'allDay'})
     }else{
       console.log('this spot is not avaliable');
     }
@@ -115,8 +115,8 @@ export default class AddReserveForm extends Component {
                 value={this.state.duration}
                 onChange={e => this.setState({duration: e.target.value})}>
                 <option value="allDay">All day</option>
-                <option value="1">An Hour</option>
-                <option value="2">2 Hours</option>
+                {/*<option value="1">An Hour</option>
+                <option value="2">2 Hours</option>*/}
               </select>
             </div>
           </div>

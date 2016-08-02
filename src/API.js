@@ -24,7 +24,10 @@ const API = {
       .done(response => { ServerActions.receiveReservations(response) })
   },
 
-
+  getAllLots() {
+    get('/api/lot')
+      .done(res => {ServerActions.receiveLots(res)})
+  },
 //   updateTenant(tenant) {
 //     // ajax({
 //     //   url: '/api/tenants',

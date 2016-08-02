@@ -14,6 +14,12 @@ const ServerActions = {
       reservation,
     })
   },
+  receiveLots(lots) {
+    AppDispatcher.dispatch({
+      actionType: 'RECEIVE_LOTS',
+      lots,
+    })
+  },
 }
 
 export default ServerActions

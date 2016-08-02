@@ -20,6 +20,7 @@ export default class Reservations extends Component {
 
   componentDidMount() {
     ReserveActions.getAllReservations();
+    // ReserveActions.getAllReservations();
     ReservationStore.startListening(this._onChange);
   }
 
