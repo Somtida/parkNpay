@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 import LotDisplay from './LotDisplay';
 import Welcome from './Welcome';
 import LotActions from '../actions/LotActions';
 import LotStore from '../stores/LotStore';
 import AddReserveForm from './AddReserveForm';
 import SelectLot from './SelectLot';
+import Reserve from './Reserve';
+
 let _getComponentState = () => {
   return {
     lots: LotStore.getAllLots(),
@@ -31,7 +32,8 @@ export default class Dashboard extends Component {
   _onChange() {
     this.setState(_getComponentState());
   }
-  pickSpot(num){
+
+  pickSpot(num) {
     console.log('picked: ', num);
     this.setState({spot: num});
   }
@@ -50,18 +52,13 @@ export default class Dashboard extends Component {
         <Welcome />
         <SelectLot options={options} pickLot={this.pickLot} />
 
-        <div>
-          <table className="table table-bordered table-inverse">
-            {this.state.lot ? <LotDisplay pickSpot={this.pickSpot} lot={lot} /> : null }
-          </table>
-        </div>
+        <table className="table table-bordered table-inverse">
+          {this.state.lot ? <LotDisplay pickSpot={this.pickSpot} lot={lot} /> : null }
+        </table>
 
-        {this.state.spot ? <AddReserveForm spot={this.state.spot} lot={lot} /> : null }
-        {/*<br />
+        {this.state.spot ? <Reserve spot={this.state.spot} lot={lot} /> : null }
+        {/* {this.state.spot ? <AddReserveForm spot={this.state.spot} lot={lot} /> : null }*/}
 
-        <Link to="reserve" type="button" className="btn btn-info col-xs-10 col-xs-offset-1">Reserve a Spot</Link>
-        <br />
-        <Link to="properties" type="button" className="btn btn-success col-xs-10 col-xs-offset-1">Check Avaliable Spot</Link>*/}
       </div>
     )
   }

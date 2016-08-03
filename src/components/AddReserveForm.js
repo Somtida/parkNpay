@@ -10,74 +10,50 @@ export default class AddReserveForm extends Component {
       name: '',
       email: '',
       phone: '',
-      lot: 'A',
+      lot: '',
       spot: '',
       duration: 'allDay',
+      price: '',
     }
-
 
     this.onSubmit = this.onSubmit.bind(this);
   }
-  // checkAvaliable(spot){
-  //   console.log('checking avaliable spot');
-  //   let avaliable = [true, true, true, true, true, true, true, true, true, true,
-  //     true, true, true, true, true, true, true, true, true, true,
-  //     true, true, true, true, true, true, true, true, true, true];
-  //   if (avaliable[spot]){
-  //     avaliable[spot] = !avaliable[spot];
-  //     console.log('avaliable');
-  //     return true;
-  //   }else{
-  //     console.log('not avaliable');
-  //     return false;
-  //   }
-  // }
-
+  componentDidMount() {
+    this.setState({
+      lot: this.props.lot._id,
+      spot: this.props.spot,
+      price: this.props.lot.price,
+    });
+  }
   onSubmit(event) {
     event.preventDefault();
     // if (!this.state.name.length || !this.state.email.length || !this.state.phone.length || !this.state.lot.length || !this.state.spot.length || !this.state.duration.length) return;
+      this.state.spot = this.props.spot;
+      this.state.lot = this.props.lot._id;
+      this.state.price = this.props.lot.price;
+
+      console.log('this.state in sumbit: ', this.state);
       console.log('1. send to actions.addNewReserve in ReserveActions: ', this.state);
       ReserveActions.addNewReserve(this.state);
-      this.setState({name: '', email: '', phone: '', lot: 'A', spot: '', duration: 'allDay'})
-    // if (this.checkAvaliable(this.state.spot)){
-    //   console.log('1. send to actions.addNewReserve in ReserveActions: ', this.state);
-    //   ReserveActions.addNewReserve(this.state);
-    //   this.setState({name: '', email: '', phone: '', lot: 'A', spot: '', duration: 'allDay'})
-    // }else{
-    //   console.log('this spot is not avaliable');
-    // }
+      this.setState({name: '', email: '', phone: '', lot: '', spot: '', duration: 'allDay'})
   }
 
   render() {
-    console.log('spot: ', this.props.spot);
-    let spot = this.props.spot;
-    console.log('lot: ', this.props.lot);
-    let lot = this.props.lot;
+    console.log('props spot: ', this.props.spot);
+    console.log('props lot: ', this.props.lot);
+    console.log('this.state: ', this.state);
     return (
       <div className="panel panel-primary">
       <div className="panel-heading text-left">Form</div>
       <div className="panel-body">
         <form>
-          {/*<div>
-            <h1 className="label label-danger">{lot.name}{spot}</h1>
-          </div>*/}
-          <div >
-            <div className="alert alert-success">
-              <h1>{lot.name}{spot}</h1>
-            </div>
-          </div>
-          {/*<div className="form-group row">
-            <label htmlFor="customerLot" className="col-xs-2 col-form-label">Lot</label>
-            <div className="col-xs-4">
-              <h3>{lot}</h3>
-            </div>
-            <label htmlFor="customerSpot" className="col-xs-2 col-form-label">Spot</label>
-            <div className="col-xs-4">
-              <h3>{spot}</h3>
-            </div>
 
+          <div >
+            <div className="alert alert-info">
+              <h1>{this.props.lot.name}{this.props.spot}</h1>
+            </div>
           </div>
-          */}
+
           <div className="form-group row">
             <label htmlFor="customerName" className="col-xs-2 col-form-label">Name</label>
             <div className="col-xs-10">
@@ -132,13 +108,12 @@ export default class AddReserveForm extends Component {
               />
             </div>
           </div>
-          <div >
-            <div className="alert alert-danger col-xs-10 col-xs-offset-1">
-              <h1>${lot.price}</h1>
-            </div>
-          </div>
           <div className="form-group row">
-            <button className="btn btn-warning col-xs-10 col-xs-offset-1"><i className="fa fa-paypal"></i>Make a Payment</button>
+            <button className="btn btn-warning col-xs-10 col-xs-offset-1">
+              <i className="fa fa-paypal"></i>
+              {/*<h1>${lot.price}</h1>*/}
+              <span>Make a Payment</span>
+            </button>
           </div>
           <div className="form-group row">
             <button

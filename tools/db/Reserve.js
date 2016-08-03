@@ -3,12 +3,12 @@ import mongoose, { Schema } from 'mongoose'
 let Reserve;
 
 let reserveSchema = Schema({
-  spot: String,
-  // duration: String,
-  price: String,
   name: String,
   email: String,
   phone: String,
+  spot: String,
+  // duration: String,
+  price: String,
   transaction: String,
   time: {type: Date},
   expirationTime: {type: Date},

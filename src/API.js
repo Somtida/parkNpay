@@ -11,6 +11,7 @@ const API = {
       reservation.time = Date.now();
       reservation.expirationTime = Date.now()+(reservation.duration*3600000);
     }
+
     console.log('3. posting to server: ', reservation);
     post('/api/reserve', reservation)
     .done(response => {

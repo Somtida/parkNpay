@@ -6,7 +6,7 @@ import ReservationStore from '../stores/ReservationStore'
 
 let _getComponentState = () => {
   return {
-    reservations: ReservationStore.getAllReservations()
+    reservations: ReservationStore.getAllReservations(),
   }
 }
 
@@ -20,7 +20,6 @@ export default class Reservations extends Component {
 
   componentDidMount() {
     ReserveActions.getAllReservations();
-    // ReserveActions.getAllReservations();
     ReservationStore.startListening(this._onChange);
   }
 
@@ -34,12 +33,26 @@ export default class Reservations extends Component {
   }
 
   render() {
+    // let spot = this.props.spot;
+    // let lot = this.props.lot;
+    console.log('spot in Reserve: ', this.props.spot);
+    console.log('lot: ', this.props.lot);
+    console.log('reservations: ', this.state.reservations);
+    let isAvaliable = this.state.reservations.some(reservation => reservation._id === this.props.lot._id && reservation.spot === this.props.spot );
+      // if(reservation._id === lot._id && reservation.spot === spot){
+      //   console.log('found match! this spot is not avaliable');
+      //   // return true;
+      // }else{
+      //   console.log('this spot is avaliable.');
+      //   // return false;
+      // }
+    // })
+    console.log('isAvaliable: ', isAvaliable);
     return (
       <div className="text-center">
-        {/*<h1 className="alert alert-info">Reserve</h1>*/}
 
         <div className="col-xs-12">
-          <AddReserveForm />
+          {!isAvaliable ? <AddReserveForm spot={this.props.spot} lot={this.props.lot} /> : 'this spot is not avaliable'}
         </div>
 
       </div>

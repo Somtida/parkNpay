@@ -4,7 +4,9 @@ const router = Router();
 import Reserve from '../db/Reserve'
 
 router.get('/', (req, res) => {
-  Reserve.find({}, (err, reservations) => {
+  Reserve.find({})
+   .populate('lot')
+   .exec((err, reservations) => {
     return res.status(err ? 400 : 200).send(err || reservations);
   })
 })

@@ -5,7 +5,6 @@ const ReserveActions = {
     API.getAllReservations();
   },
   addNewReserve(reservation) {
-    
     console.log('2. get reservation: ', reservation);
     API.addNewReserve(reservation);
   },
