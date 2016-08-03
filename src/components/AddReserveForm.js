@@ -18,32 +18,34 @@ export default class AddReserveForm extends Component {
 
     this.onSubmit = this.onSubmit.bind(this);
   }
-  checkAvaliable(spot){
-    console.log('checking avaliable spot');
-    let avaliable = [true, true, true, true, true, true, true, true, true, true,
-      true, true, true, true, true, true, true, true, true, true,
-      true, true, true, true, true, true, true, true, true, true];
-    if (avaliable[spot]){
-      avaliable[spot] = !avaliable[spot];
-      console.log('avaliable');
-      return true;
-    }else{
-      console.log('not avaliable');
-      return false;
-    }
-  }
+  // checkAvaliable(spot){
+  //   console.log('checking avaliable spot');
+  //   let avaliable = [true, true, true, true, true, true, true, true, true, true,
+  //     true, true, true, true, true, true, true, true, true, true,
+  //     true, true, true, true, true, true, true, true, true, true];
+  //   if (avaliable[spot]){
+  //     avaliable[spot] = !avaliable[spot];
+  //     console.log('avaliable');
+  //     return true;
+  //   }else{
+  //     console.log('not avaliable');
+  //     return false;
+  //   }
+  // }
 
   onSubmit(event) {
     event.preventDefault();
     // if (!this.state.name.length || !this.state.email.length || !this.state.phone.length || !this.state.lot.length || !this.state.spot.length || !this.state.duration.length) return;
-    // if(this.state.spot)
-    if (this.checkAvaliable(this.state.spot)){
       console.log('1. send to actions.addNewReserve in ReserveActions: ', this.state);
       ReserveActions.addNewReserve(this.state);
       this.setState({name: '', email: '', phone: '', lot: 'A', spot: '', duration: 'allDay'})
-    }else{
-      console.log('this spot is not avaliable');
-    }
+    // if (this.checkAvaliable(this.state.spot)){
+    //   console.log('1. send to actions.addNewReserve in ReserveActions: ', this.state);
+    //   ReserveActions.addNewReserve(this.state);
+    //   this.setState({name: '', email: '', phone: '', lot: 'A', spot: '', duration: 'allDay'})
+    // }else{
+    //   console.log('this spot is not avaliable');
+    // }
   }
 
   render() {
