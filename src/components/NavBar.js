@@ -25,7 +25,7 @@ export default class NavBar extends Component {
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
             <ul className="nav navbar-nav navbar-right">
-              {/*<li><Link to="reserve">Reserve Spot</Link></li>*/}
+              <li><Link to="dashboard">Reserve Spot</Link></li>
               <li><Link to="remaining">Time Remaining</Link></li>
             </ul>
           </div>
