@@ -49,11 +49,35 @@ export default class AddReserveForm extends Component {
   }
 
   render() {
+    console.log('spot: ', this.props.spot);
+    let spot = this.props.spot;
+    console.log('lot: ', this.props.lot);
+    let lot = this.props.lot;
     return (
       <div className="panel panel-primary">
       <div className="panel-heading text-left">Form</div>
       <div className="panel-body">
         <form>
+          {/*<div>
+            <h1 className="label label-danger">{lot.name}{spot}</h1>
+          </div>*/}
+          <div >
+            <div className="alert alert-success">
+              <h1>{lot.name}{spot}</h1>
+            </div>
+          </div>
+          {/*<div className="form-group row">
+            <label htmlFor="customerLot" className="col-xs-2 col-form-label">Lot</label>
+            <div className="col-xs-4">
+              <h3>{lot}</h3>
+            </div>
+            <label htmlFor="customerSpot" className="col-xs-2 col-form-label">Spot</label>
+            <div className="col-xs-4">
+              <h3>{spot}</h3>
+            </div>
+
+          </div>
+          */}
           <div className="form-group row">
             <label htmlFor="customerName" className="col-xs-2 col-form-label">Name</label>
             <div className="col-xs-10">
@@ -79,33 +103,6 @@ export default class AddReserveForm extends Component {
                 onChange={e => this.setState({email: e.target.value})}
               />
             </div>
-          </div>
-          <div className="form-group row">
-            <label htmlFor="customerLot" className="col-xs-2 col-form-label">Lot</label>
-            <div className="col-xs-4">
-              <select
-                className="form-control"
-                id="customerLot"
-                value={this.state.lot}
-                onChange={e => this.setState({lot: e.target.value})}>
-                <option value="A">A</option>
-                {/*<option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>*/}
-              </select>
-            </div>
-            <label htmlFor="customerSpot" className="col-xs-2 col-form-label">Spot</label>
-            <div className="col-xs-4">
-              <input
-                type="text"
-                className="form-control"
-                id="customerSpot"
-                placeholder="11"
-                value={this.state.spot}
-                onChange={e => this.setState({spot: e.target.value})}
-              />
-            </div>
-
           </div>
 
           <div className="form-group row">
@@ -135,10 +132,9 @@ export default class AddReserveForm extends Component {
               />
             </div>
           </div>
-          <div className="form-group row">
-            <label htmlFor="customerPrice" className="col-xs-2 col-form-label">Price</label>
-            <div className="col-xs-10 text-left">
-              <h2>$20</h2>
+          <div >
+            <div className="alert alert-danger col-xs-10 col-xs-offset-1">
+              <h1>${lot.price}</h1>
             </div>
           </div>
           <div className="form-group row">

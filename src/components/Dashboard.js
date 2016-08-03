@@ -32,7 +32,7 @@ export default class Dashboard extends Component {
     this.setState(_getComponentState());
   }
   pickSpot(num){
-    console.log('pick: ', num);
+    console.log('picked: ', num);
     this.setState({spot: num});
   }
   pickLot(id){
@@ -52,11 +52,11 @@ export default class Dashboard extends Component {
 
         <div>
           <table className="table table-bordered table-inverse">
-            {this.state.lot ? <LotDisplay lot={lot} /> : null }
+            {this.state.lot ? <LotDisplay pickSpot={this.pickSpot} lot={lot} /> : null }
           </table>
         </div>
 
-        <AddReserveForm pickSpot={this.pickSpot} />
+        {this.state.spot ? <AddReserveForm spot={this.state.spot} lot={lot} /> : null }
         {/*<br />
 
         <Link to="reserve" type="button" className="btn btn-info col-xs-10 col-xs-offset-1">Reserve a Spot</Link>
