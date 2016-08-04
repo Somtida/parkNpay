@@ -15,7 +15,7 @@ export default class LotDisplay extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      occupiedSpots: {}
+      occupiedSpots: {},
     }
     // this.state = {
     //   selectedSpot: '',
@@ -28,14 +28,14 @@ export default class LotDisplay extends Component {
 
   componentWillReceiveProps(nextProps){
     console.log("NEXT PROPS", nextProps)
-    this.setState({selectedSpot: null})
+    // this.setState({selectedSpot: null})
     ReserveActions.getReservationsForLot(nextProps.lot._id)
   }
 
   componentDidMount() {
     // let lotId = this.props.lot._id;
     // console.log('lotId: ', lotId);
-    let { _id } = this.props.lot
+    let { _id } = this.props.lot;
     ReserveActions.getReservationsForLot(_id);
     ReservationStore.startListening(this._onChange);
   }

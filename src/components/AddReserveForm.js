@@ -110,17 +110,7 @@ export default class AddReserveForm extends Component {
             </div>
           </div>
 
-
-          {/*<div className="form-group row">
-            <button
-              onClick={<Link to="checkout"></Link>}
-              className="btn btn-warning col-xs-10 col-xs-offset-1">
-              <i className="fa fa-paypal"></i>
-              <h1>${this.props.lot.price}</h1>
-              <span>Make a Payment</span>
-            </button>
-          </div>*/}
-
+          <Checkout />
           <div className="form-group row">
             <button
               className="btn btn-success col-xs-10 col-xs-offset-1"
@@ -129,7 +119,6 @@ export default class AddReserveForm extends Component {
             </button>
           </div>
         </form>
-        <Checkout />
       </div>
       </div>
     )

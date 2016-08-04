@@ -6,7 +6,6 @@ import LotStore from '../stores/LotStore';
 import AddReserveForm from './AddReserveForm';
 import SelectLot from './SelectLot';
 import Reserve from './Reserve';
-
 let _getComponentState = () => {
   return {
     lots: LotStore.getAllLots(),
@@ -17,14 +16,6 @@ export default class Dashboard extends Component {
   constructor(props){
     super(props);
     this.state = _getComponentState();
-    //
-    // this.state = {
-    //   lots: [],
-    //   selectedLot: '',
-    //   occupiedSpots: {},
-    //   selectedSpot: '',
-    //
-    // }
 
     this._onChange = this._onChange.bind(this);
     this.pickSpot = this.pickSpot.bind(this);
@@ -65,7 +56,7 @@ export default class Dashboard extends Component {
         </table>
 
         {this.state.spot ? <Reserve spot={this.state.spot} lot={lot} /> : null }
-        {/*{this.state.spot ? <AddReserveForm spot={this.state.spot} lot={lot} /> : null }*/}
+
 
       </div>
     )
