@@ -51,7 +51,7 @@ export default class AddReserveForm extends Component {
 
           <div >
             <div className="alert alert-info">
-              <h1>{this.props.lot.name}{this.props.spot}</h1>
+              <h1>{this.props.lot.name}{this.state.lot == this.props.lotthis.props.spot}</h1>
             </div>
           </div>
 

@@ -25,7 +25,7 @@ export default class LotDisplay extends Component {
   componentDidMount() {
     let lotId = this.props.lot._id;
     console.log('lotId: ', lotId);
-    ReserveActions.getReservation(lotId);
+    ReserveActions.getAllReservations();
     ReservationStore.startListening(this._onChange);
   }
 
@@ -37,7 +37,7 @@ export default class LotDisplay extends Component {
     let lotId = this.props.lot._id;
     console.log('lotId: ', lotId);
     console.log('7. updating Component state');
-    this.setState({reservation:   ReservationStore.getReservation(lotId)})
+    this.setState({reservation:   ReservationStore.getAllReservations()})
   }
 
   selectSpot(num){
@@ -49,13 +49,11 @@ export default class LotDisplay extends Component {
   }
 
   render() {
-    console.log('this.props: ', this.props);
-
-    console.log('selectedSpot: ', this.state.selectedSpot);
-    console.log('lot: ', this.props.lot._id);
-    console.log('reservation: ', this.state.reservation);
-
-    // let isAvaliable = this.state.reservation.some(reservation => reservation.lot == this.props.lot._id && reservation.spot == this.props.spot );
+    // console.log('this.props: ', this.props);
+    //
+    // console.log('selectedSpot: ', this.state.selectedSpot);
+    // console.log('lot: ', this.props.lot._id);
+    // console.log('reservation: ', this.state.reservation);
 
     // reservedSpots = {1: true, 3: true}
 
@@ -78,15 +76,17 @@ export default class LotDisplay extends Component {
       cursor: 'not-allowed',
       backgroundColor: '#ff9933',
       pointEvents: 'none',
+      backgroundImage: 'url("https://cdn3.iconfinder.com/data/icons/auto-parts-2/100/Auto_Parts-32-128.png")',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
     }
     if(totalSpots){
 
       for(let i=1;i <= totalSpots;i++){
-        if(this.state.reservation.hasOwnProperty(i)){
-          console.log('i: ', i);
+        if(this.state.reservation[this.props.lot._id]==i){
           display.push(<td key={i} style={unclickable} className="col-xs-1" disabled>{i}</td>)
         }else{
-          if(i<=10){
+          if(i <= 10){
             this.state.selectedSpot===i ? display.push(<td key={i} style={selected} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>) : display.push(<td key={i} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>);
           }else if(i <= 20) {
             this.state.selectedSpot===i ? display2.push(<td key={i} style={selected} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>) : display2.push(<td key={i} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>);

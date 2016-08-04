@@ -5,7 +5,30 @@ import Reserve from '../db/Reserve'
 
 router.get('/', (req, res) => {
   Reserve.find({}, (err, reservations) => {
-    return res.status(err ? 400 : 200).send(err || reservations);
+    // return res.status(err ? 400 : 200).send(err || reservations);
+    if (err) {
+      return res.status(400).send(err);
+    }else{
+      return res.send(reservations.reduce((acc, reservation ) => {
+        acc[reservation.lot] = reservation.spot
+        return acc
+        // first iteration
+        // acc = {},
+        /* reservation = {
+            "_id": "57a190c9d2eecb0631303f6b",
+            "name": "a a",
+            "email": "a@a.a",
+            "phone": "12343443443",
+            "lot": "57a0ed1b40c1b83b26b601dc",
+            "spot": "2",
+            "price": "20",
+            "time": "2016-08-03T06:35:53.713Z",
+            "expirationTime": "2016-08-02T07:00:00.000Z",
+            "__v": 0
+          }
+          */
+      }, {}));
+    }
   })
 })
 router.get('/:id', (req, res) => {

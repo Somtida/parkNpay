@@ -56,8 +56,8 @@ export default class Dashboard extends Component {
           {this.state.lot ? <LotDisplay pickSpot={this.pickSpot} lot={lot} /> : null }
         </table>
 
-        {this.state.spot ? <Reserve spot={this.state.spot} lot={lot} /> : null }
-        {/* {this.state.spot ? <AddReserveForm spot={this.state.spot} lot={lot} /> : null }*/}
+        {/*{this.state.spot ? <Reserve spot={this.state.spot} lot={lot} /> : null }
+        {this.state.spot ? <AddReserveForm spot={this.state.spot} lot={lot} /> : null }*/}
 
       </div>
     )
