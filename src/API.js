@@ -16,7 +16,7 @@ const API = {
     post('/api/reserve', reservation)
     .done(response => {
       console.log('4. get response from Server');
-      ServerActions.receiveOneReservation(response)
+      ServerActions.receiveAddReservation(response)
     })
   },
 
@@ -27,13 +27,18 @@ const API = {
   getReservation(lotId) {
     console.log('lotId API: ', lotId);
     get(`/api/reserve/${lotId}`)
-      .done(response => { ServerActions.receiveOneReservation(response) })
+      .done(response => { ServerActions.receiveLotReservation(response) })
   },
 
   getAllLots() {
     get('/api/lot')
       .done(res => {ServerActions.receiveLots(res)})
   },
+
+  getReservationsForLot(id) {
+    get('/api/reserve/' + id)
+      .done(res => ServerActions.receiveReservationsForLot(res))
+  }
 //   updateTenant(tenant) {
 //     // ajax({
 //     //   url: '/api/tenants',

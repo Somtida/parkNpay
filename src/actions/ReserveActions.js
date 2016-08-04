@@ -11,6 +11,9 @@ const ReserveActions = {
     console.log('2. get reservation: ', reservation);
     API.addNewReserve(reservation);
   },
+  getReservationsForLot(id) {
+    API.getReservationsForLot(id);
+  }
 
 }
 

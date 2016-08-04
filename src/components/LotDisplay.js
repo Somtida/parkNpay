@@ -15,17 +15,28 @@ export default class LotDisplay extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedSpot: '',
-      reservation: '',
-      // reservation:  _getComponentState(),
-    };
-    // this.state = _getComponentState()
+      occupiedSpots: {}
+    }
+    // this.state = {
+    //   selectedSpot: '',
+    //   reservation: '',
+    //   // reservation:  _getComponentState(),
+    // };
+    // // this.state = _getComponentState()
     this._onChange = this._onChange.bind(this)
   }
+
+  componentWillReceiveProps(nextProps){
+    console.log("NEXT PROPS", nextProps)
+    this.setState({selectedSpot: null})
+    ReserveActions.getReservationsForLot(nextProps.lot._id)
+  }
+
   componentDidMount() {
-    let lotId = this.props.lot._id;
-    console.log('lotId: ', lotId);
-    ReserveActions.getAllReservations();
+    // let lotId = this.props.lot._id;
+    // console.log('lotId: ', lotId);
+    let { _id } = this.props.lot
+    ReserveActions.getReservationsForLot(_id);
     ReservationStore.startListening(this._onChange);
   }
 
@@ -34,10 +45,10 @@ export default class LotDisplay extends Component {
   }
 
   _onChange() {
-    let lotId = this.props.lot._id;
-    console.log('lotId: ', lotId);
-    console.log('7. updating Component state');
-    this.setState({reservation:   ReservationStore.getAllReservations()})
+    let { _id } = this.props.lot;
+    // console.log('lotId: ', lotId);
+    // console.log('7. updating Component state');
+    this.setState({occupiedSpots: ReservationStore.getOccupiedSpots(_id)})
   }
 
   selectSpot(num){
@@ -57,7 +68,7 @@ export default class LotDisplay extends Component {
 
     // reservedSpots = {1: true, 3: true}
 
-    let {totalSpots} = this.props.lot;
+    let { totalSpots } = this.props.lot;
     let display = [];
     let display2 = [];
     let display3 = [];
@@ -80,13 +91,50 @@ export default class LotDisplay extends Component {
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
     }
+
+
+
+    // if(totalSpots){
+    //   console.log('totalSpots: ', totalSpots);
+    //   console.log('this.state.reservation: ', this.state.reservation);
+    //   console.log(this.state.reservation.hasOwnProperty(this.props.lot._id));
+    //   console.log(this.state.reservation[this.props.lot._id].indexOf(""+5) !== -1);
+    //   for(let i=1;i <= totalSpots;i++){
+    //     if(this.state.reservation.hasOwnProperty(this.props.lot._id)){
+    //       if(this.state.reservation[this.props.lot._id].indexOf(''+i) !== -1){
+    //         console.log('found');
+    //         display.push(<td key={i} style={unclickable} className="col-xs-1" disabled>{i}</td>)
+    //       }else{
+    //         if(i <= 10){
+    //           this.state.selectedSpot===i ? display.push(<td key={i} style={selected} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>) : display.push(<td key={i} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>);
+    //         }else if(i <= 20) {
+    //           this.state.selectedSpot===i ? display2.push(<td key={i} style={selected} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>) : display2.push(<td key={i} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>);
+    //         }else if(i <= 30) {
+    //           this.state.selectedSpot===i ? display3.push(<td key={i} style={selected} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>) : display3.push(<td key={i} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>);
+    //         }
+    //       }
+    //
+    //     }else{
+    //       if(i <= 10){
+    //         this.state.selectedSpot===i ? display.push(<td key={i} style={selected} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>) : display.push(<td key={i} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>);
+    //       }else if(i <= 20) {
+    //         this.state.selectedSpot===i ? display2.push(<td key={i} style={selected} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>) : display2.push(<td key={i} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>);
+    //       }else if(i <= 30) {
+    //         this.state.selectedSpot===i ? display3.push(<td key={i} style={selected} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>) : display3.push(<td key={i} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>);
+    //       }
+    //     }
+    //   }
+    // }
+    //
     if(totalSpots){
 
       for(let i=1;i <= totalSpots;i++){
-        if(this.state.reservation[this.props.lot._id]==i){
+        if(this.state.occupiedSpots.hasOwnProperty(i)){
+          // console.log('i: ', i);
+          console.log('occupiedSpot', i);
           display.push(<td key={i} style={unclickable} className="col-xs-1" disabled>{i}</td>)
-        }else{
-          if(i <= 10){
+        } else {
+          if(i<=10){
             this.state.selectedSpot===i ? display.push(<td key={i} style={selected} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>) : display.push(<td key={i} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>);
           }else if(i <= 20) {
             this.state.selectedSpot===i ? display2.push(<td key={i} style={selected} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>) : display2.push(<td key={i} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>);
@@ -100,12 +148,10 @@ export default class LotDisplay extends Component {
     }
 
 
-
     return (
       <tbody>
-        <tr style={styles}>
-          {display}
-        </tr>
+
+        <tr style={styles}>{display}</tr>
         { totalSpots > 10 && totalSpots < 20 ? <tr style={styles}>{display2}</tr> : null }
         { totalSpots > 20 && totalSpots < 30 ? <tr style={styles}>{display3}</tr> : null }
 

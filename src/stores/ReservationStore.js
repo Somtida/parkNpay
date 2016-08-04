@@ -3,6 +3,14 @@ import AppDispatcher from '../AppDispatcher'
 
 let _reservations = [];
 let _reservation = [];
+let _reservationsByLot = {};
+
+// {
+//   _lotId: {
+//     "1": true,
+//     "2": true
+//   }
+// }
 
 class ReservationStore extends EventEmitter {
   constructor(props){
@@ -14,13 +22,26 @@ class ReservationStore extends EventEmitter {
           _reservations = action.reservations;
           this.emit('CHANGE');
           break;
-        case 'RECEIVE_ONE_RESERVATION':
-          console.log('6.');
+        case 'RECEIVE_ADD_RESERVATION':
+          _reservation.push(action.reservation);
+          this.emit('CHANGE');
+          break;
+        case 'RECEIVE_LOT_RESERVATION':
           _reservation = action.reservation;
+          this.emit('CHANGE');
+          break;
+        case 'RECEIVE_RESERVATIONS_FOR_LOT':
+          let { reservations } = action
+          _reservationsByLot[reservations.lotId] = reservations.occupiedSpots;
+          console.log('RESERVATIONS BY LOT', _reservationsByLot)
           this.emit('CHANGE');
           break;
       }
     });
+  }
+
+  getOccupiedSpots(id) {
+    return _reservationsByLot[id];
   }
 
   getAllReservations() {

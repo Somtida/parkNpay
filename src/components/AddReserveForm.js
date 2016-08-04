@@ -19,13 +19,13 @@ export default class AddReserveForm extends Component {
 
     this.onSubmit = this.onSubmit.bind(this);
   }
-  componentDidMount() {
-    this.setState({
-      lot: this.props.lot._id,
-      spot: this.props.spot,
-      price: this.props.lot.price,
-    });
-  }
+  // componentDidMount() {
+  //   this.setState({
+  //     lot: this.props.lot._id,
+  //     spot: this.props.spot,
+  //     price: this.props.lot.price,
+  //   });
+  // }
   onSubmit(event) {
     event.preventDefault();
     // if (!this.state.name.length || !this.state.email.length || !this.state.phone.length || !this.state.lot.length || !this.state.spot.length || !this.state.duration.length) return;
@@ -51,7 +51,7 @@ export default class AddReserveForm extends Component {
 
           <div >
             <div className="alert alert-info">
-              <h1>{this.props.lot.name}{this.state.lot == this.props.lotthis.props.spot}</h1>
+              <h1>{this.props.spot <= this.props.lot.totalSpots ? this.props.lot.name+this.props.spot : 'please pick a spot'}</h1>
             </div>
           </div>
 

@@ -17,6 +17,14 @@ export default class Dashboard extends Component {
   constructor(props){
     super(props);
     this.state = _getComponentState();
+    //
+    // this.state = {
+    //   lots: [],
+    //   selectedLot: '',
+    //   occupiedSpots: {},
+    //   selectedSpot: '',
+    //
+    // }
 
     this._onChange = this._onChange.bind(this);
     this.pickSpot = this.pickSpot.bind(this);
@@ -56,8 +64,8 @@ export default class Dashboard extends Component {
           {this.state.lot ? <LotDisplay pickSpot={this.pickSpot} lot={lot} /> : null }
         </table>
 
-        {/*{this.state.spot ? <Reserve spot={this.state.spot} lot={lot} /> : null }
-        {this.state.spot ? <AddReserveForm spot={this.state.spot} lot={lot} /> : null }*/}
+        {this.state.spot ? <Reserve spot={this.state.spot} lot={lot} /> : null }
+        {/*{this.state.spot ? <AddReserveForm spot={this.state.spot} lot={lot} /> : null }*/}
 
       </div>
     )
