@@ -9,7 +9,7 @@ export default class Checkout extends Component {
       <div>
       <form action="/api/payment" method="POST">
         <script
-          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          src="https://checkout.stripe.com/checkout.js" className="stripe-button"
           data-key="pk_test_ZqZQY5YVFSMrc9SQNVcAXXim"
           data-amount="999"
           data-name="Demo Site"

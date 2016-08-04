@@ -24,6 +24,11 @@ const API = {
     get('/api/reserve')
       .done(response => { ServerActions.receiveReservations(response) })
   },
+  getReservation(lotId) {
+    console.log('lotId API: ', lotId);
+    get(`/api/reserve/${lotId}`)
+      .done(response => { ServerActions.receiveOneReservation(response) })
+  },
 
   getAllLots() {
     get('/api/lot')

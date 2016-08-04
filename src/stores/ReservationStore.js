@@ -2,6 +2,7 @@ import { EventEmitter } from 'events'
 import AppDispatcher from '../AppDispatcher'
 
 let _reservations = [];
+let _reservation = [];
 
 class ReservationStore extends EventEmitter {
   constructor(props){
@@ -15,7 +16,7 @@ class ReservationStore extends EventEmitter {
           break;
         case 'RECEIVE_ONE_RESERVATION':
           console.log('6.');
-          _reservations.push(action.reservation);
+          _reservation = action.reservation;
           this.emit('CHANGE');
           break;
       }
@@ -25,6 +26,10 @@ class ReservationStore extends EventEmitter {
   getAllReservations() {
     console.log('8.');
     return _reservations;
+  }
+  getReservation() {
+    console.log('8.');
+    return _reservation;
   }
 
   startListening(cb) {

@@ -110,7 +110,7 @@ export default class AddReserveForm extends Component {
             </div>
           </div>
 
-          <Checkout />
+
           {/*<div className="form-group row">
             <button
               onClick={<Link to="checkout"></Link>}
@@ -129,6 +129,7 @@ export default class AddReserveForm extends Component {
             </button>
           </div>
         </form>
+        <Checkout />
       </div>
       </div>
     )

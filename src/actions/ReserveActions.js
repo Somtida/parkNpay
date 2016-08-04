@@ -4,16 +4,14 @@ const ReserveActions = {
   getAllReservations() {
     API.getAllReservations();
   },
+  getReservation(lotId) {
+    API.getReservation(lotId);
+  },
   addNewReserve(reservation) {
     console.log('2. get reservation: ', reservation);
     API.addNewReserve(reservation);
   },
-  updateTenant(tenant) {
-    API.updateTenant(tenant);
-  },
-  deleteTenant(id) {
-    API.deleteTenant(id);
-  },
+
 }
 
 export default ReserveActions

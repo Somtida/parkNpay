@@ -43,8 +43,8 @@ export default class Dashboard extends Component {
   }
   render() {
     console.log(this.state);
-    let options = this.state.lots.map(lot => {
-      return <option value={lot._id}>{lot.name}</option>
+    let options = this.state.lots.map((lot,index) => {
+      return <option key={index} value={lot._id}>{lot.name}</option>
     });
     let lot = this.state.lots.find(lot => lot._id === this.state.lot);
     return (
