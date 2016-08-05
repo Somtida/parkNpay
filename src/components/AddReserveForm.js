@@ -110,7 +110,6 @@ export default class AddReserveForm extends Component {
             </div>
           </div>
 
-          <Checkout />
           <div className="form-group row">
             <button
               className="btn btn-success col-xs-10 col-xs-offset-1"
@@ -119,6 +118,7 @@ export default class AddReserveForm extends Component {
             </button>
           </div>
         </form>
+        <Checkout />
       </div>
       </div>
     )

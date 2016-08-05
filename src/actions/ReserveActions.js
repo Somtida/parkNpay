@@ -13,7 +13,10 @@ const ReserveActions = {
   },
   getReservationsForLot(id) {
     API.getReservationsForLot(id);
-  }
+  },
+  getStripeResponse(token) {
+    API.getStripeResponse(token)
+  },
 
 }
 

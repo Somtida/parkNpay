@@ -38,7 +38,24 @@ const API = {
   getReservationsForLot(id) {
     get('/api/reserve/' + id)
       .done(res => ServerActions.receiveReservationsForLot(res))
-  }
+  },
+  getStripeResponse(token) {
+    console.log('token API: ', token);
+    post('/api/payment', token)
+      // .done(res => ServerActions.receiveStripeResponse(res))
+
+
+  //   fetch(`https://api.stripe.com/v1/${token.id}`, {
+  //   method: 'post',
+  //   headers: {
+  //     'Accept': 'application/json',
+  //     'Content-Type': 'application/x-www-form-urlencoded',
+  //     'Authorization': 'Bearer ' + 'sk_test_f1tvlQPMaPuzQzyBBr575KN6',
+  //   },
+  //   // body: JSON.stringify(...)
+  // });
+  },
+
 //   updateTenant(tenant) {
 //     // ajax({
 //     //   url: '/api/tenants',

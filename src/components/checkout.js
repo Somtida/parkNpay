@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import ReserveActions from '../actions/ReserveActions'
 export default class Checkout extends Component {
   constructor(props) {
     super(props)
@@ -11,8 +11,9 @@ export default class Checkout extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    Stripe.card.createToken(e.currentTarget, (status, response) => {
-      console.log( status, response );
+    Stripe.card.createToken(e.currentTarget, (status, token) => {
+      console.log( status, token );
+      ReserveActions.getStripeResponse(token);
     });
   }
   render() {
