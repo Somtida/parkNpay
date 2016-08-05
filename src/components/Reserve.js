@@ -15,7 +15,8 @@ export default class Reservations extends Component {
       <div className="text-center">
 
         <div className="col-xs-12">
-          {this.props.spot ? <AddReserveForm spot={this.props.spot} lot={this.props.lot} /> : 'this spot is not avaliable'}
+          <p>status: SUCCESS</p>
+          <h2>Thank you</h2>
 
         </div>
 

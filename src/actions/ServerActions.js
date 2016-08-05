@@ -1,6 +1,13 @@
 import AppDispatcher from '../AppDispatcher'
 
 const ServerActions = {
+  receiveStripeResponse(stripeObj) {
+    console.log('5. dispatching stripe');
+    AppDispatcher.dispatch({
+      actionType: 'RECEIVE_STRIPE',
+      stripeObj,
+    })
+  },
   receiveReservations(reservations) {
     AppDispatcher.dispatch({
       actionType: 'RECEIVE_RESERVATIONS',
@@ -38,9 +45,10 @@ const ServerActions = {
     console.log(reservations)
     AppDispatcher.dispatch({
       actionType: 'RECEIVE_RESERVATIONS_FOR_LOT',
-      reservations
+      reservations,
     })
-  }
+  },
+
 }
 
 export default ServerActions

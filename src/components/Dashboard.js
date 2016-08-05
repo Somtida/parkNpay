@@ -6,31 +6,56 @@ import LotStore from '../stores/LotStore';
 import AddReserveForm from './AddReserveForm';
 import SelectLot from './SelectLot';
 import Reserve from './Reserve';
-let _getComponentState = () => {
-  return {
-    lots: LotStore.getAllLots(),
-  }
-}
+import Checkout from './Checkout';
+import StripeStore from '../stores/StripeStore';
+import Success from './Success';
+// let _getComponentState = () => {
+//   return {
+//     lots: LotStore.getAllLots(),
+//     lot: '57a0ed1b40c1b83b26b601dc',
+//   }
+// }
 
 export default class Dashboard extends Component {
   constructor(props){
     super(props);
-    this.state = _getComponentState();
+    this.state = {
+      lots: LotStore.getAllLots(),
+      lot:   {
+        "_id": "57a0ed1b40c1b83b26b601dc",
+        "name": "A",
+        "totalSpots": 12,
+        "price": 20,
+        "__v": 0,
+      },
+      spot: '',
+      stripe: null,
 
-    this._onChange = this._onChange.bind(this);
+    }
+    // this.state = _getComponentState();
+
+    // this._onChange = this._onChange.bind(this);
     this.pickSpot = this.pickSpot.bind(this);
     this.pickLot = this.pickLot.bind(this);
+    this.handelLotStoreChange = this.handelLotStoreChange.bind(this);
+    this.handelStripStoreChange = this.handelStripStoreChange.bind(this);
+  }
+  handelLotStoreChange() {
+    this.setState({lots: LotStore.getAllLots()})
+  }
+  handelStripStoreChange() {
+    this.setState({stripe: StripeStore.getStripeTrans()})
   }
   componentDidMount() {
     LotActions.getAllLots();
-    LotStore.startListening(this._onChange);
+    LotStore.startListening(this.handelLotStoreChange);
+    StripeStore.startListening(this.handelStripStoreChange);
+
   }
   componentWillUnmount() {
     LotStore.stopListening(this._onChange);
   }
-  _onChange() {
-    this.setState(_getComponentState());
-  }
+
 
   pickSpot(num) {
     console.log('picked: ', num);
@@ -41,24 +66,28 @@ export default class Dashboard extends Component {
     this.setState({lot: id});
   }
   render() {
-    console.log(this.state);
+    let lot = this.state.lot;
+    let spot = this.state.spot;
     let options = this.state.lots.map((lot,index) => {
       return <option key={index} value={lot._id}>{lot.name}</option>
     });
-    let lot = this.state.lots.find(lot => lot._id === this.state.lot);
-    return (
-      <div className="text-center">
-        <Welcome />
-        <SelectLot options={options} pickLot={this.pickLot} />
-
-        <table className="table table-bordered table-inverse">
-          {this.state.lot ? <LotDisplay pickSpot={this.pickSpot} lot={lot} /> : null }
-        </table>
-
-        {this.state.spot ? <Reserve spot={this.state.spot} lot={lot} /> : null }
-
-
-      </div>
-    )
+    let stripe = this.state.stripe;
+    // let lot = this.state.lots.find(lot => lot._id === this.state.lot);
+    if (stripe){
+      return (
+        <div className="text-center">
+          <Success />
+        </div>
+      )
+    }else{
+      return (
+        <div>
+          <Welcome />
+          <SelectLot options={options} pickLot={this.pickLot} />
+          {lot ? <LotDisplay pickSpot={this.pickSpot} lot={lot} /> : null }
+          {spot ? <Checkout spot={spot} lot={lot} /> : null }
+        </div>
+      )
+    }
   }
 }

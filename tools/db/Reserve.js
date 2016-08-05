@@ -9,8 +9,8 @@ let reserveSchema = Schema({
   spot: String,
   // duration: String,
   price: String,
-  transaction: String,
-  time: {type: Date},
+  transaction: {},
+  time: {type: Date, default: Date.now},
   expirationTime: {type: Date},
   lot: {type: Schema.Types.ObjectId, ref: 'lot'},
 

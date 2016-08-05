@@ -36,6 +36,13 @@ class ReservationStore extends EventEmitter {
           console.log('RESERVATIONS BY LOT', _reservationsByLot)
           this.emit('CHANGE');
           break;
+        case 'RECEIVE_STRIPE':
+          let reservation = action.stripeObj.reservation;
+          let lotId = reservation.lot;
+          _reservationsByLot[lotId][reservation.spot] = true;
+          console.log('_reservationsByLot: ', _reservationsByLot);
+          // this.emit('CHANGE');
+          break;
       }
     });
   }

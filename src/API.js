@@ -39,61 +39,16 @@ const API = {
     get('/api/reserve/' + id)
       .done(res => ServerActions.receiveReservationsForLot(res))
   },
-  getStripeResponse(token) {
-    console.log('token API: ', token);
-    post('/api/payment', token)
-      // .done(res => ServerActions.receiveStripeResponse(res))
+  getStripeResponse(payload) {
+    console.log('3. sent to payload API: ', payload);
+    post('/api/payment', payload)
+      .done(res => {
+        console.log('4. receive transaction');
+        ServerActions.receiveStripeResponse(res)
+      })
 
-
-  //   fetch(`https://api.stripe.com/v1/${token.id}`, {
-  //   method: 'post',
-  //   headers: {
-  //     'Accept': 'application/json',
-  //     'Content-Type': 'application/x-www-form-urlencoded',
-  //     'Authorization': 'Bearer ' + 'sk_test_f1tvlQPMaPuzQzyBBr575KN6',
-  //   },
-  //   // body: JSON.stringify(...)
-  // });
   },
 
-//   updateTenant(tenant) {
-//     // ajax({
-//     //   url: '/api/tenants',
-//     //   method: 'PUT',
-//     //   contentType: 'application/json',
-//     //   data: JSON.stringify(tenant),
-//     //   success: (res) => {
-//     //     console.log(res);
-//     //   }
-//     // })
-//     fetch('/api/reserve', {
-//       method: 'PUT',
-//       headers: new Headers({
-//         'Content-Type': 'application/json'
-//       }),
-//       body: JSON.stringify(tenant)
-//     })
-//       .then((res) => res.json())
-//       .then(data => {
-//         console.log(data);
-//       })
-//   },
-//
-//   deleteTenant(tenantID) {
-//     fetch('/api/reserve/' + tenantID, {
-//       method: 'DELETE'
-//     })
-//       .then(response => {
-//         return response.json();
-//       })
-//       .then(data => {
-//         console.log(data);
-//         ServerActions.receiveTenants(data)
-//       })
-//       .catch(err => {
-//         console.log(err);
-//       })
-//   }
 }
 
 export default API

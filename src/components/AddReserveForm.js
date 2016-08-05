@@ -110,15 +110,15 @@ export default class AddReserveForm extends Component {
             </div>
           </div>
 
-          <div className="form-group row">
+          {/*<div className="form-group row">
             <button
               className="btn btn-success col-xs-10 col-xs-offset-1"
               onClick={this.onSubmit}>
               Make a Reservation
             </button>
-          </div>
+          </div>*/}
         </form>
-        <Checkout />
+        <Checkout lot={this.props.lot}/>
       </div>
       </div>
     )

@@ -16,6 +16,7 @@ export default class LotDisplay extends Component {
     super(props);
     this.state = {
       occupiedSpots: {},
+      selectedSpot: 1,
     }
     // this.state = {
     //   selectedSpot: '',
@@ -62,7 +63,7 @@ export default class LotDisplay extends Component {
   render() {
     // console.log('this.props: ', this.props);
     //
-    // console.log('selectedSpot: ', this.state.selectedSpot);
+    console.log('selectedSpot: ', this.state.selectedSpot);
     // console.log('lot: ', this.props.lot._id);
     // console.log('reservation: ', this.state.reservation);
 
@@ -149,6 +150,7 @@ export default class LotDisplay extends Component {
 
 
     return (
+      <table className="table table-bordered table-inverse">
       <tbody>
 
         <tr style={styles}>{display}</tr>
@@ -156,6 +158,7 @@ export default class LotDisplay extends Component {
         { totalSpots > 20 && totalSpots < 30 ? <tr style={styles}>{display3}</tr> : null }
 
       </tbody>
+      </table>
 
     )
 

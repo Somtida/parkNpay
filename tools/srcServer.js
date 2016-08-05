@@ -17,7 +17,7 @@ const compiler = webpack(config);
 
 import mongoose from 'mongoose';
 
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/property-manager');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/parkNpay');
 
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
@@ -28,7 +28,7 @@ app.use(require('webpack-hot-middleware')(compiler));
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use('/api', api)
