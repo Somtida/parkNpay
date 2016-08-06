@@ -6,7 +6,6 @@ export default class Reservations extends Component {
 
   }
 
-
   render() {
 
     console.log('spot in Reserve: ', this.props.spot);

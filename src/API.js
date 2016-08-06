@@ -40,10 +40,8 @@ const API = {
       .done(res => ServerActions.receiveReservationsForLot(res))
   },
   getStripeResponse(payload) {
-    console.log('3. sent to payload API: ', payload);
     post('/api/payment', payload)
       .done(res => {
-        console.log('4. receive transaction');
         ServerActions.receiveStripeResponse(res)
       })
 

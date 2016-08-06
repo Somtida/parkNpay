@@ -4,20 +4,7 @@ export default class Remaining extends Component {
   constructor(props){
     super(props);
   }
-  getTimeRemaining(endtime){
-    var t = Date.parse(endtime) - Date.parse(new Date());
-    var seconds = Math.floor( (t/1000) % 60 );
-    var minutes = Math.floor( (t/1000/60) % 60 );
-    var hours = Math.floor( (t/(1000*60*60)) % 24 );
-    var days = Math.floor( t/(1000*60*60*24) );
-    return {
-      'total': t,
-      'days': days,
-      'hours': hours,
-      'minutes': minutes,
-      'seconds': seconds
-    }
-  }
+
   render() {
     let styles = {
       height: '100px',
@@ -28,11 +15,46 @@ export default class Remaining extends Component {
       borderRadius: '5px',
     };
     return (
-      <div className="text-center">
+      <div classNameName="text-center">
         <h1>Time Remaining</h1>
-        <div style={styles}>
-          Date.now()
+        <div className="container">
+          <div className="page-header">
+            <h1 className="text-center">Pomodoro Timer</h1>
+            <h2 className="text-center">
+              <span>
+                <button id="pomodoroButton" className="btn btn-default" type="submit" onclick="onPomodoroTimer()" >Pomodoro</button>
+                <button id="shortButton" className="btn btn-default" type="submit" onclick="onShortTimer()">Short Break</button>
+                <button id="longButton" className="btn btn-default" type="submit" onclick="onLongTimer()">Long Break</button>
+              </span>
+            </h2>
+          </div>
+          <div className="panel panel-default">
+            <div className="panel-body text-center">
+              <div className="timer-time timer-container">
+                <div className="timer-time-set timer-box" id="currentTime">
+                  <span id="hoursValue">00</span><span>:</span><span id="minutesValue">00</span><span>:</span><span id="secondsValue">00</span>
+                </div>
+                <div className="timer-time-set timer-box" id="nextTime">
+                  <span id="hoursNext">00</span><span>:</span><span id="minutesNext">00</span><span>:</span><span id="secondsNext">00</span>
+                </div>
+              </div>
+              <div>
+                <button id="restartButton" className="btn btn-warning btn-lg" type="submit" onclick="onResetTimer()">
+                  <span className="glyphicon glyphicon-step-backward" aria-hidden="true"></span> Reset
+                </button>
+                <button id="startButton" className="btn btn-primary btn-lg" type="submit" onclick="onStartTimer()">
+                  <span className="glyphicon glyphicon-play" aria-hidden="true"></span> Start
+                </button>
+                <button id="stopButton" className="btn btn-danger btn-lg" type="submit" onclick="onStopTimer()">
+                  <span className="glyphicon glyphicon-stop" aria-hidden="true"></span> Stop
+                </button>
+              </div>
+            </div>
+
+          </div>
+
         </div>
+
 
 
       </div>

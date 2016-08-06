@@ -32,7 +32,7 @@ router.post('/', (req, res) => {
         price: lot.price,
         transaction: charge,
         lot: lot._id,
-        // expirationTime: ,
+        expirationTime: new Date().setHours(0,0,0,0),
 
       }, (err, reservation) => {
         if (err) return res.status(400).send(err);

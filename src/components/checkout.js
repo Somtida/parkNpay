@@ -45,19 +45,16 @@ export default class Checkout extends Component {
 
       };
 
-      console.log('payload: ', payload);
+      // console.log('payload: ', payload);
       StripeActions.getStripeResponse(payload);
     });
   }
   _onChange() {
-    console.log('7. setState :', this.state.token);
     this.setState({stripe: StripeStore.getStripeTrans(this.state.token)})
   }
 
   render() {
-
-    console.log('price: ', this.props.lot.price);
-    console.log('this.state: ', this.state);
+    // console.log('this.state: ', this.state);
     return (
       <div className="panel panel-primary">
         <div className="panel-heading text-left">Form</div>
@@ -168,7 +165,11 @@ export default class Checkout extends Component {
               </div>
             </div>
             <div>
-              <button className="btn btn-warning col-xs-10 col-xs-offset-1" value="Submit Payment" maxLength={3} ><h1>${this.props.lot.price}</h1><span>PAY NOW</span></button>
+              <button
+                className="btn btn-warning col-xs-10 col-xs-offset-1"
+                value="Submit Payment" maxLength={3}>
+                <h1>${this.props.lot.price}</h1><span>PAY NOW</span>
+              </button>
             </div>
           </form>
         </div>

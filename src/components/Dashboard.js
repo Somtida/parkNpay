@@ -3,18 +3,11 @@ import LotDisplay from './LotDisplay';
 import Welcome from './Welcome';
 import LotActions from '../actions/LotActions';
 import LotStore from '../stores/LotStore';
-import AddReserveForm from './AddReserveForm';
 import SelectLot from './SelectLot';
-import Reserve from './Reserve';
 import Checkout from './Checkout';
 import StripeStore from '../stores/StripeStore';
 import Success from './Success';
-// let _getComponentState = () => {
-//   return {
-//     lots: LotStore.getAllLots(),
-//     lot: '57a0ed1b40c1b83b26b601dc',
-//   }
-// }
+
 
 export default class Dashboard extends Component {
   constructor(props){
@@ -26,9 +19,7 @@ export default class Dashboard extends Component {
       stripe: null,
 
     }
-    // this.state = _getComponentState();
 
-    // this._onChange = this._onChange.bind(this);
     this.pickSpot = this.pickSpot.bind(this);
     this.pickLot = this.pickLot.bind(this);
     this.handelLotStoreChange = this.handelLotStoreChange.bind(this);
@@ -52,21 +43,21 @@ export default class Dashboard extends Component {
 
 
   pickSpot(num) {
-    console.log('picked: ', num);
+    // console.log('picked: ', num);
     this.setState({spot: num});
   }
   pickLot(id){
-    console.log('id: ', id);
+    // console.log('id: ', id);
     this.setState({lot: id});
   }
   render() {
-    // let lot = this.state.lot;
     let spot = this.state.spot;
+    let stripe = this.state.stripe;
+    let lot = this.state.lots.find(lot => lot._id === this.state.lot);
     let options = this.state.lots.map((lot,index) => {
       return <option key={index} value={lot._id}>{lot.name}</option>
     });
-    let stripe = this.state.stripe;
-    let lot = this.state.lots.find(lot => lot._id === this.state.lot);
+
     if (stripe){
       return (
         <div className="text-center">

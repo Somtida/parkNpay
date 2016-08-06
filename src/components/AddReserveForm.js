@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import ReserveActions from '../actions/ReserveActions'
-// import { Link } from 'react-router'
 import Checkout from './Checkout'
 export default class AddReserveForm extends Component {
 
@@ -103,13 +102,6 @@ export default class AddReserveForm extends Component {
             </div>
           </div>
 
-          {/*<div className="form-group row">
-            <button
-              className="btn btn-success col-xs-10 col-xs-offset-1"
-              onClick={this.onSubmit}>
-              Make a Reservation
-            </button>
-          </div>*/}
         </form>
         <Checkout lot={this.props.lot}/>
       </div>

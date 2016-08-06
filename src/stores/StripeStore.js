@@ -11,7 +11,6 @@ class StripeStore extends EventEmitter {
       switch(action.actionType) {
         case 'RECEIVE_STRIPE':
           _stripe = action.stripeObj.charge;
-          console.log('_stripe: ', _stripe);
           this.emit('CHANGE');
           break;
       }

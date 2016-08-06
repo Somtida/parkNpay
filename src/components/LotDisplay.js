@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import AddReserveForm from './AddReserveForm'
 
 import ReserveActions from '../actions/ReserveActions'
 import ReservationStore from '../stores/ReservationStore'
@@ -16,7 +15,7 @@ export default class LotDisplay extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    console.log("NEXT PROPS", nextProps)
+    // console.log("NEXT PROPS", nextProps)
     ReserveActions.getReservationsForLot(nextProps.lot._id)
   }
 
@@ -36,22 +35,11 @@ export default class LotDisplay extends Component {
   }
 
   selectSpot(num){
-    console.log('select: ', num);
-    console.log('props',this.props)
     this.setState({selectedSpot: num});
-    console.log('state',this.state);
     this.props.pickSpot(num);
   }
 
   render() {
-    // console.log('this.props: ', this.props);
-    //
-    // console.log('selectedSpot: ', this.state.selectedSpot);
-    // console.log('lot: ', this.props.lot._id);
-    // console.log('reservation: ', this.state.reservation);
-
-    // reservedSpots = {1: true, 3: true}
-
     let { totalSpots } = this.props.lot;
     let display = [];
     let display2 = [];
@@ -76,15 +64,11 @@ export default class LotDisplay extends Component {
       backgroundPosition: 'center',
     }
 
-
-
-
     if(totalSpots){
 
       for(let i=1;i <= totalSpots;i++){
         if(this.state.occupiedSpots.hasOwnProperty(i)){
-          // console.log('i: ', i);
-          console.log('occupiedSpot', i);
+          // console.log('occupiedSpot', i);
           if(i<=10){
             display.push(<td key={i} style={unclickable} className="col-xs-1" disabled>{i}</td>)
           }else if(i <= 20) {
@@ -109,13 +93,13 @@ export default class LotDisplay extends Component {
 
     return (
       <table className="table table-bordered table-inverse">
-      <tbody>
+        <tbody>
 
-        <tr style={styles}>{display}</tr>
-        { totalSpots > 10 && totalSpots < 20 ? <tr style={styles}>{display2}</tr> : null }
-        { totalSpots > 20 && totalSpots < 30 ? <tr style={styles}>{display3}</tr> : null }
+          <tr style={styles}>{display}</tr>
+          { totalSpots > 10 && totalSpots < 20 ? <tr style={styles}>{display2}</tr> : null }
+          { totalSpots > 20 && totalSpots < 30 ? <tr style={styles}>{display3}</tr> : null }
 
-      </tbody>
+        </tbody>
       </table>
 
     )
