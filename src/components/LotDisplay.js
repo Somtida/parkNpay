@@ -96,8 +96,8 @@ export default class LotDisplay extends Component {
         <tbody>
 
           <tr style={styles}>{display}</tr>
-          { totalSpots > 10 && totalSpots < 20 ? <tr style={styles}>{display2}</tr> : null }
-          { totalSpots > 20 && totalSpots < 30 ? <tr style={styles}>{display3}</tr> : null }
+          { totalSpots > 10 ? <tr style={styles}>{display2}</tr> : null }
+          { totalSpots > 20 ? <tr style={styles}>{display3}</tr> : null }
 
         </tbody>
       </table>
