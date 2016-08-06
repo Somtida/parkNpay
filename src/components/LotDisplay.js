@@ -4,38 +4,23 @@ import AddReserveForm from './AddReserveForm'
 import ReserveActions from '../actions/ReserveActions'
 import ReservationStore from '../stores/ReservationStore'
 
-// let _getComponentState = () => {
-//   return {
-//     // reservation: ReservationStore.getReservation(this.props.lot._id),
-//   }
-// }
-
-
 export default class LotDisplay extends Component {
   constructor(props) {
     super(props);
     this.state = {
       occupiedSpots: {},
-      selectedSpot: 1,
+      selectedSpot: '',
     }
-    // this.state = {
-    //   selectedSpot: '',
-    //   reservation: '',
-    //   // reservation:  _getComponentState(),
-    // };
-    // // this.state = _getComponentState()
+
     this._onChange = this._onChange.bind(this)
   }
 
   componentWillReceiveProps(nextProps){
     console.log("NEXT PROPS", nextProps)
-    // this.setState({selectedSpot: null})
     ReserveActions.getReservationsForLot(nextProps.lot._id)
   }
 
   componentDidMount() {
-    // let lotId = this.props.lot._id;
-    // console.log('lotId: ', lotId);
     let { _id } = this.props.lot;
     ReserveActions.getReservationsForLot(_id);
     ReservationStore.startListening(this._onChange);
@@ -47,8 +32,6 @@ export default class LotDisplay extends Component {
 
   _onChange() {
     let { _id } = this.props.lot;
-    // console.log('lotId: ', lotId);
-    // console.log('7. updating Component state');
     this.setState({occupiedSpots: ReservationStore.getOccupiedSpots(_id)})
   }
 
@@ -63,7 +46,7 @@ export default class LotDisplay extends Component {
   render() {
     // console.log('this.props: ', this.props);
     //
-    console.log('selectedSpot: ', this.state.selectedSpot);
+    // console.log('selectedSpot: ', this.state.selectedSpot);
     // console.log('lot: ', this.props.lot._id);
     // console.log('reservation: ', this.state.reservation);
 
@@ -95,45 +78,20 @@ export default class LotDisplay extends Component {
 
 
 
-    // if(totalSpots){
-    //   console.log('totalSpots: ', totalSpots);
-    //   console.log('this.state.reservation: ', this.state.reservation);
-    //   console.log(this.state.reservation.hasOwnProperty(this.props.lot._id));
-    //   console.log(this.state.reservation[this.props.lot._id].indexOf(""+5) !== -1);
-    //   for(let i=1;i <= totalSpots;i++){
-    //     if(this.state.reservation.hasOwnProperty(this.props.lot._id)){
-    //       if(this.state.reservation[this.props.lot._id].indexOf(''+i) !== -1){
-    //         console.log('found');
-    //         display.push(<td key={i} style={unclickable} className="col-xs-1" disabled>{i}</td>)
-    //       }else{
-    //         if(i <= 10){
-    //           this.state.selectedSpot===i ? display.push(<td key={i} style={selected} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>) : display.push(<td key={i} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>);
-    //         }else if(i <= 20) {
-    //           this.state.selectedSpot===i ? display2.push(<td key={i} style={selected} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>) : display2.push(<td key={i} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>);
-    //         }else if(i <= 30) {
-    //           this.state.selectedSpot===i ? display3.push(<td key={i} style={selected} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>) : display3.push(<td key={i} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>);
-    //         }
-    //       }
-    //
-    //     }else{
-    //       if(i <= 10){
-    //         this.state.selectedSpot===i ? display.push(<td key={i} style={selected} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>) : display.push(<td key={i} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>);
-    //       }else if(i <= 20) {
-    //         this.state.selectedSpot===i ? display2.push(<td key={i} style={selected} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>) : display2.push(<td key={i} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>);
-    //       }else if(i <= 30) {
-    //         this.state.selectedSpot===i ? display3.push(<td key={i} style={selected} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>) : display3.push(<td key={i} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>);
-    //       }
-    //     }
-    //   }
-    // }
-    //
+
     if(totalSpots){
 
       for(let i=1;i <= totalSpots;i++){
         if(this.state.occupiedSpots.hasOwnProperty(i)){
           // console.log('i: ', i);
           console.log('occupiedSpot', i);
-          display.push(<td key={i} style={unclickable} className="col-xs-1" disabled>{i}</td>)
+          if(i<=10){
+            display.push(<td key={i} style={unclickable} className="col-xs-1" disabled>{i}</td>)
+          }else if(i <= 20) {
+            display2.push(<td key={i} style={unclickable} className="col-xs-1" disabled>{i}</td>)
+          }else if(i <= 30) {
+            display3.push(<td key={i} style={unclickable} className="col-xs-1" disabled>{i}</td>)
+          }
         } else {
           if(i<=10){
             this.state.selectedSpot===i ? display.push(<td key={i} style={selected} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>) : display.push(<td key={i} className="col-xs-1" onClick={() => this.selectSpot(i)}>{i}</td>);

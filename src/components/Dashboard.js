@@ -21,13 +21,7 @@ export default class Dashboard extends Component {
     super(props);
     this.state = {
       lots: LotStore.getAllLots(),
-      lot:   {
-        "_id": "57a0ed1b40c1b83b26b601dc",
-        "name": "A",
-        "totalSpots": 12,
-        "price": 20,
-        "__v": 0,
-      },
+      lot:   {},
       spot: '',
       stripe: null,
 
@@ -66,13 +60,13 @@ export default class Dashboard extends Component {
     this.setState({lot: id});
   }
   render() {
-    let lot = this.state.lot;
+    // let lot = this.state.lot;
     let spot = this.state.spot;
     let options = this.state.lots.map((lot,index) => {
       return <option key={index} value={lot._id}>{lot.name}</option>
     });
     let stripe = this.state.stripe;
-    // let lot = this.state.lots.find(lot => lot._id === this.state.lot);
+    let lot = this.state.lots.find(lot => lot._id === this.state.lot);
     if (stripe){
       return (
         <div className="text-center">

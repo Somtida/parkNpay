@@ -19,16 +19,9 @@ export default class AddReserveForm extends Component {
 
     this.onSubmit = this.onSubmit.bind(this);
   }
-  // componentDidMount() {
-  //   this.setState({
-  //     lot: this.props.lot._id,
-  //     spot: this.props.spot,
-  //     price: this.props.lot.price,
-  //   });
-  // }
+
   onSubmit(event) {
     event.preventDefault();
-    // if (!this.state.name.length || !this.state.email.length || !this.state.phone.length || !this.state.lot.length || !this.state.spot.length || !this.state.duration.length) return;
       this.state.spot = this.props.spot;
       this.state.lot = this.props.lot._id;
       this.state.price = this.props.lot.price;

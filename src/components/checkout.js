@@ -6,13 +6,13 @@ export default class Checkout extends Component {
     super(props)
     this.state = {
       customerInfo: {
-        name: 'Bob',
-        email: 'b@b.b',
-        phone: '12342342345',
-        lot: 'A',
-        spot: '1',
+        name: '',
+        email: '',
+        phone: '',
+        lot: '',
+        spot: '',
         duration: 'allDay',
-        price: '15',
+        price: '',
       },
       token: '',
       stripe: {},
@@ -81,6 +81,7 @@ export default class Checkout extends Component {
                   placeholder="Bob Burger"
                   value={this.state.customerInfo.name}
                   onChange={e => this.setState({customerInfo: {name: e.target.value}})}
+                  required
                 />
               </div>
             </div>
@@ -94,6 +95,7 @@ export default class Checkout extends Component {
                   placeholder="bob@burger.com"
                   value={this.state.customerInfo.email}
                   onChange={e => this.setState({customerInfo: {email: e.target.value}})}
+                  required
                 />
               </div>
             </div>
@@ -122,6 +124,7 @@ export default class Checkout extends Component {
                   placeholder="1-(555)-555-5555"
                   value={this.state.customerInfo.phone}
                   onChange={e => this.setState({customerInfo: {phone: e.target.value}})}
+                  required
                 />
               </div>
             </div>
@@ -133,21 +136,22 @@ export default class Checkout extends Component {
                   type="text"
                   className="form-control"
                   data-stripe="number"
-                  placeholder="number"
-                  defaultValue="4242424242424242"
-                  maxLength={16} />
+                  placeholder="4242424242424242"
+                  maxLength={16}
+                  required
+                />
               </div>
             </div>
 
             <div className="form-group row">
-              <label className="col-xs-2 col-form-label">Expiration (MM/YY)</label>
+              <label className="col-xs-2 col-form-label">Expiration (MM/YYYY)</label>
               <div className="col-xs-10">
                 <div className="col-xs-5">
-                  <input className="form-control" type="text" data-stripe="exp_month" placeholder="exp-month" defaultValue="12" maxLength={2} />
+                  <input className="form-control" type="text" data-stripe="exp_month" placeholder="12" maxLength={2} required />
                 </div>
                 <span className="col-xs-1"> / </span>
                 <div className="col-xs-6">
-                  <input className="form-control" type="text" data-stripe="exp_year" placeholder="exp-year"  defaultValue="2017" maxLength={4} />
+                  <input className="form-control" type="text" data-stripe="exp_year" placeholder="2017" maxLength={4} required />
                 </div>
               </div>
             </div>
@@ -158,8 +162,9 @@ export default class Checkout extends Component {
                   type="text"
                   className="form-control"
                   data-stripe="cvc"
-                   defaultValue="123"
-                  placeholder="cvc" />
+                  placeholder="xxx"
+                  required
+                />
               </div>
             </div>
             <div>
